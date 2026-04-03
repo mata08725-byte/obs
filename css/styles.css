@@ -1,0 +1,377 @@
+/* Sanatorium Aura - Main Stylesheet */
+
+/* Alpine.js x-cloak - скрывает элементы до инициализации */
+[x-cloak] {
+    display: none !important;
+}
+
+/* Base Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    scroll-behavior: smooth;
+}
+
+/* Navigation Container - Compact Padding */
+nav .container {
+    padding-top: 0.375rem;
+    padding-bottom: 0.375rem;
+}
+
+/* Logo Image - Transparent Background */
+nav a img {
+    background: transparent !important;
+    mix-blend-mode: multiply;
+}
+
+/* Hero Background */
+.hero-bg {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('https://image.qwenlm.ai/public_source/c7d9ebb0-6d3d-4867-8709-ac8342c48e9b/18e0be304-817a-45a1-a500-3e1771e38418.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Page Header Background */
+.page-header-bg {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('https://image.qwenlm.ai/public_source/c7d9ebb0-6d3d-4867-8709-ac8342c48e9b/18e0be304-817a-45a1-a500-3e1771e38418.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Animations */
+.fade-in {
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+@keyframes slideInLeft {
+    from { 
+        opacity: 0; 
+        transform: translateX(-50px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateX(0); 
+    }
+}
+
+@keyframes slideInRight {
+    from { 
+        opacity: 0; 
+        transform: translateX(50px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateX(0); 
+    }
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.8s ease-out;
+}
+
+.slide-in-right {
+    animation: slideInRight 0.8s ease-out;
+}
+
+/* Gallery Image Hover Effect */
+.gallery-img {
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.gallery-img:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+/* Testimonial Card */
+.testimonial-card {
+    transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Service Card */
+.service-card {
+    transition: all 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+}
+
+.service-card:hover .service-img {
+    transform: scale(1.1);
+}
+
+.service-img {
+    transition: transform 0.5s ease;
+}
+
+/* Room Card */
+.room-card {
+    transition: all 0.3s ease;
+}
+
+.room-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+/* Program Card */
+.program-card {
+    transition: all 0.3s ease;
+    border: 1px solid #e7e5e0;
+}
+
+.program-card:hover {
+    border-color: #0d9488;
+    box-shadow: 0 15px 30px rgba(13, 148, 136, 0.15);
+}
+
+/* Button Styles */
+.btn-primary {
+    background-color: #0d9488;
+    color: white;
+    padding: 12px 32px;
+    border-radius: 9999px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 14px rgba(13, 148, 136, 0.4);
+}
+
+.btn-primary:hover {
+    background-color: #0f766e;
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(13, 148, 136, 0.5);
+}
+
+.btn-secondary {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 12px 32px;
+    border-radius: 9999px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Navigation */
+.nav-link {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #0d9488;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Form Input Focus */
+.form-input:focus {
+    ring: 2px;
+    ring-color: #0d9488;
+    border-color: #0d9488;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0) translateX(-50%);
+    }
+    40% {
+        transform: translateY(-10px) translateX(-50%);
+    }
+    60% {
+        transform: translateY(-5px) translateX(-50%);
+    }
+}
+
+/* Stat Number */
+.stat-number {
+    background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Feature Icon */
+.feature-icon {
+    background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Team Member Card */
+.team-card {
+    transition: all 0.3s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-10px);
+}
+
+.team-card img {
+    transition: transform 0.5s ease;
+}
+
+.team-card:hover img {
+    transform: scale(1.05);
+}
+
+/* Lightbox */
+.lightbox {
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* Price Badge */
+.price-badge {
+    background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+}
+
+/* Testimonial Dots */
+.testimonial-dot {
+    transition: all 0.3s ease;
+}
+
+.testimonial-dot.active {
+    background-color: #0d9488;
+    transform: scale(1.2);
+}
+
+/* Mobile Menu */
+.mobile-menu {
+    transition: all 0.3s ease;
+}
+
+/* Smooth Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f5f5f4;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #0d9488;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0f766e;
+}
+
+/* Selection Color */
+::selection {
+    background-color: #0d9488;
+    color: white;
+}
+
+/* Focus Outline */
+*:focus-visible {
+    outline: 2px solid #0d9488;
+    outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+    nav, footer, .no-print {
+        display: none !important;
+    }
+}
+
+/* Responsive Utilities */
+@media (max-width: 768px) {
+    .hero-bg, .page-header-bg {
+        background-attachment: scroll;
+    }
+}
+
+/* Loading Animation */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(13, 148, 136, 0.3);
+    border-radius: 50%;
+    border-top-color: #0d9488;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Fade In Up */
+.fade-in-up {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Scale In */
+.scale-in {
+    animation: scaleIn 0.5s ease-out;
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Анимация для элементов при скролле - не скрываем по умолчанию */
+.animate-on-scroll {
+    /* Элементы видимы по умолчанию */
+}

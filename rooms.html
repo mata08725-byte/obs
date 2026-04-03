@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Номера санатория Щучинский — стандарт, полулюкс, люкс, семейные номера и деревянные домики.">
+    <title>Номера | Санаторий Щучинский</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-stone-50 text-stone-800" x-data="{ mobileMenuOpen: false }">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3 flex-shrink-0">
+                <img src="images/logo.png" alt="Щучинский" class="h-16 w-auto" style="background: transparent;">
+                <span class="text-2xl font-bold text-teal-700 tracking-tight hidden sm:block">Щучинский</span>
+            </a>
+
+            <div class="hidden md:flex space-x-6 lg:space-x-8 items-center">
+                <a href="index.html" class="nav-link text-stone-600 hover:text-teal-600 transition-colors text-sm lg:text-base">Главная</a>
+                <a href="about.html" class="nav-link text-stone-600 hover:text-teal-600 transition-colors text-sm lg:text-base">О санатории</a>
+                <a href="services.html" class="nav-link text-stone-600 hover:text-teal-600 transition-colors text-sm lg:text-base">Услуги</a>
+                <a href="rooms.html" class="nav-link text-teal-600 font-semibold text-sm lg:text-base">Номера</a>
+                <a href="programs.html" class="nav-link text-stone-600 hover:text-teal-600 transition-colors text-sm lg:text-base">Программы</a>
+                <a href="gallery.html" class="nav-link text-stone-600 hover:text-teal-600 transition-colors text-sm lg:text-base">Галерея</a>
+                <a href="contact.html" class="bg-teal-600 text-white px-6 py-3 rounded-full hover:bg-teal-700 transition-all transform hover:scale-105 shadow-md text-base whitespace-nowrap">Забронировать</a>
+            </div>
+
+            <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden text-stone-600 focus:outline-none flex-shrink-0" data-mobile-menu>
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <div x-show="mobileMenuOpen"
+             x-cloak
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 -translate-y-2"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 translate-y-0"
+             x-transition:leave-end="opacity-0 -translate-y-2"
+             @click.away="mobileMenuOpen = false"
+             class="md:hidden bg-white border-t border-stone-100 absolute w-full shadow-lg"
+             data-mobile-menu-panel>
+            <div class="flex flex-col px-6 py-4 space-y-4">
+                <a href="index.html" class="text-stone-600 hover:text-teal-600" data-mobile-menu-link>Главная</a>
+                <a href="about.html" class="text-stone-600 hover:text-teal-600" data-mobile-menu-link>О санатории</a>
+                <a href="services.html" class="text-stone-600 hover:text-teal-600" data-mobile-menu-link>Услуги</a>
+                <a href="rooms.html" class="text-teal-600 font-semibold" data-mobile-menu-link>Номера</a>
+                <a href="programs.html" class="text-stone-600 hover:text-teal-600" data-mobile-menu-link>Программы</a>
+                <a href="gallery.html" class="text-stone-600 hover:text-teal-600" data-mobile-menu-link>Галерея</a>
+                <a href="contact.html" class="text-teal-600 font-semibold" data-mobile-menu-link>Забронировать</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header-bg h-[30vh] min-h-[250px] flex items-center justify-center text-center px-4 relative">
+        <div class="max-w-4xl text-white fade-in">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">Наши Номера</h1>
+            <p class="text-lg md:text-xl text-stone-200 max-w-2xl mx-auto">Комфортное размещение для любого типа отдыха</p>
+        </div>
+    </header>
+
+    <!-- Room Types -->
+    <section class="py-20 bg-stone-100">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-stone-900 mb-4">Типы Номеров</h2>
+                <p class="text-stone-600 max-w-2xl mx-auto">7 категорий номеров для вашего комфортного отдыха</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Room 1 - Standard (double) -->
+                <div class="room-card bg-white rounded-2xl overflow-hidden shadow-lg">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://image.qwenlm.ai/public_source/c7d9ebb0-6d3d-4867-8709-ac8342c48e9b/189a55cf6-3b1f-4db5-a826-045c13727768.png" alt="Стандарт с двуспальной кроватью" class="w-full h-full object-cover">
+                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold text-teal-700">
+                            Стандарт
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-stone-800 mb-2">Стандарт (с двуспальной кроватью)</h3>
+                        <p class="text-stone-600 mb-4 text-sm">Уютный номер для пары с комфортной двуспальной кроватью.</p>
+                        <div class="flex items-center gap-4 text-stone-500 text-sm mb-4">
+                            <span class="flex items-center gap-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                </svg>
+                                2 гостя
+                            </span>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-stone-100 rounded text-xs text-stone-600">Wi-Fi</span>
+                            <span class="px-2 py-1 bg-stone-100 rounded text-xs text-stone-600">ТВ</span>
+                            <span class="px-2 py-1 bg-stone-100 rounded text-xs text-stone-600">Душ</span>
+                        </div>
+                        <button class="w-full bg-teal-600 text-white py-3 rounded-lg font-semibold hover:bg-teal-700 transition-colors" data-open-booking data-room-name="Стандарт (двуспальная)">
+                            Забронировать
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Room 2 - Standard (twin) -->
+                <div class="room-card bg-white rounded-2xl overflow-hidden shadow-lg">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://image.qwenlm.ai/public_source/c7d9ebb0-6d3d-4867-8709-ac8342c48e9b/15ac0cca4-c1a7-4883-925d-65f13495df46.png" alt="Стандарт 2-х местный" class="w-full h-full object-cover">
+                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold text-teal-700">
+                            Стандарт
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-stone-800 mb-2">Стандарт (2-х местный)</h3>
+                        <p class="text-stone-600 mb-4 text-sm">Номер с двумя односпальными кроватями для друзей или коллег.</p>
+                        <div class="flex items-center gap-4 text-stone-500 text-sm mb-4">
+                            <span class="flex items-center gap-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                </svg>
+                                2 гостя
+                            </span>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-stone-100 rounded text-xs text-stone-600">Wi-Fi</span>
+                            <span class="px-2 py-1 bg-stone-100 rounded text-xs text-stone-600">ТВ</span>
+                            <span class="px-2 py-1 bg-stone-100 rounded text-xs text-stone-600">Душ</span>
+                        </div>
+                        <button class="w-full bg-teal-600 text-white py-3 rounded-lg font-semibold hover:bg-teal-700 transition-colors" data-open-booking data-room-name="Стандарт (2-х местный)">
+                            Забронировать
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Room 3 - Semi-lux -->
+                <div class="room-card bg-white rounded-2xl overflow-hidden shadow-lg">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://image.qwenlm.ai/public_source/c7d9ebb0-6d3d-4867-8709-ac8342c48e9b/198db000b-4719-44e7-9a92-1e97b9579f05.png" alt="Полулюкс" class="w-full h-full object-cover">
+                        <div class="absolute top-4 right-4 bg-teal-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                            Полулюкс
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-stone-800 mb-2">Полулюкс</h3>
+                        <p class="text-stone-600 mb-4 text-sm">Просторный номер с гостиной зоной и улучшенным интерьером.</p>
+                        <div class="flex items-center gap-4 text-stone-500 text-sm mb-4">
+                            <span class="flex items-center gap-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                </svg>
+                                2-3 гостя
+                            </span>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-stone-100 rounded text-xs text-stone-600">Гостиная</span>
+                            <span class="px-2 py-1 bg-stone-100 rounded text-xs text-stone-600">Мини-бар</span>
+                            <span class="px-2 py-1 bg-stone-100 rounded text-xs text-stone-600">Балкон</span>
+                        </div>
+                        <button class="w-full bg-teal-600 text-white py-3 rounded-lg font-semibold hover:bg-teal-700 transition-colors" data-open-booking data-room-name="Полулюкс">
+                            Забронировать
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Room 4 - Lux -->
+                <div class="room-card bg-white rounded-2xl overflow-hidden shadow-lg">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://image.qwenlm.ai/public_source/c7d9ebb0-6d3d-4867-8709-ac8342c48e9b/15930bae3-832a-48a7-b490-dd578142df13.png" alt="Люкс" class="w-full h-full object-cover">
+                        <div class="absolute top-4 right-4 bg-gradient-to-r from-amber-500 to-yellow-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                            Люкс
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-stone-800 mb-2">Люкс</h3>
+                        <p class="text-stone-600 mb-4 text-sm">Роскошный номер с отдельной спальней и гостиной для максимального комфорта.</p>
+                        <div class="flex items-center gap-4 text-stone-500 text-sm mb-4">
+                            <span class="flex items-center gap-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                </svg>
+                                2-4 гостя
+                            </span>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-stone-100 rounded text-xs text-stone-600">Спальня</span>
+                            <span class="px-2 py-1 bg-stone-100 rounded text-xs text-stone-600">Гостиная</span>
+                            <span class="px-2 py-1 bg-stone-100 rounded text-xs text-stone-600">Ванна</span>
+                        </div>
+                        <button class="w-full bg-teal-600 text-white py-3 rounded-lg font-semibold hover:bg-teal-700 transition-colors" data-open-booking data-room-name="Люкс">
+                            Забронировать
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Room 5 - Family Lux -->
+                <div class="room-card bg-white rounded-2xl overflow-hidden shadow-lg">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://image.qwenlm.ai/public_source/c7d9ebb0-6d3d-4867-8709-ac8342c48e9b/18e0be304-817a-45a1-a500-3e1771e38418.png" alt="Семейный люкс" class="w-full h-full object-cover">
+                        <div class="absolute top-4 right-4 bg-gradient-to-r from-amber-500 to-yellow-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                            Семейный
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-stone-800 mb-2">Семейный (люкс)</h3>
+                        <p class="text-stone-600 mb-4 text-sm">Просторный номер для семьи с детьми. Две комнаты и все удобства.</p>
+                        <div class="flex items-center gap-4 text-stone-500 text-sm mb-4">
+                            <span class="flex items-center gap-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                </svg>
+                                3-5 гостей
+                            </span>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-stone-100 rounded text-xs text-stone-600">2 комнаты</span>
+                            <span class="px-2 py-1 bg-stone-100 rounded text-xs text-stone-600">Кухня</span>
+                            <span class="px-2 py-1 bg-stone-100 rounded text-xs text-stone-600">Вид на озеро</span>
+                        </div>
+                        <button class="w-full bg-teal-600 text-white py-3 rounded-lg font-semibold hover:bg-teal-700 transition-colors" data-open-booking data-room-name="Семейный люкс">
+                            Забронировать
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Room 6 - Wooden House -->
+                <div class="room-card bg-white rounded-2xl overflow-hidden shadow-lg">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://image.qwenlm.ai/public_source/c7d9ebb0-6d3d-4867-8709-ac8342c48e9b/189a55cf6-3b1f-4db5-a826-045c13727768.png" alt="Деревянный домик" class="w-full h-full object-cover">
+                        <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                            Эко-домик
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-stone-800 mb-2">Домик деревянный</h3>
+                        <p class="text-stone-600 mb-4 text-sm">Отдельный деревянный домик в лесу для уединённого отдыха.</p>
+                        <div class="flex items-center gap-4 text-stone-500 text-sm mb-4">
+                            <span class="flex items-center gap-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                </svg>
+                                2-4 гостя
+                            </span>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-stone-100 rounded text-xs text-stone-600">В лесу</span>
+                            <span class="px-2 py-1 bg-stone-100 rounded text-xs text-stone-600">Терраса</span>
+                            <span class="px-2 py-1 bg-stone-100 rounded text-xs text-stone-600">Мангал</span>
+                        </div>
+                        <button class="w-full bg-teal-600 text-white py-3 rounded-lg font-semibold hover:bg-teal-700 transition-colors" data-open-booking data-room-name="Деревянный домик">
+                            Забронировать
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Second Building Info -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <img src="https://image.qwenlm.ai/public_source/c7d9ebb0-6d3d-4867-8709-ac8342c48e9b/15ac0cca4-c1a7-4883-925d-65f13495df46.png" alt="Второй корпус" class="rounded-2xl shadow-xl w-full h-[400px] object-cover">
+                </div>
+                <div class="md:w-1/2 space-y-6">
+                    <h2 class="text-teal-600 font-semibold tracking-wide uppercase text-sm">Дополнительно</h2>
+                    <h3 class="text-3xl md:text-4xl font-bold text-stone-900">Второй корпус</h3>
+                    <p class="text-stone-600 leading-relaxed">
+                        Второй корпус санатория предлагает дополнительные номера различных категорий. Все номера оборудованы необходимой мебелью и техникой для комфортного проживания.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 text-stone-700">
+                            <svg class="w-5 h-5 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Номера различных категорий
+                        </li>
+                        <li class="flex items-center gap-3 text-stone-700">
+                            <svg class="w-5 h-5 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Близость к лечебному корпусу
+                        </li>
+                        <li class="flex items-center gap-3 text-stone-700">
+                            <svg class="w-5 h-5 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Тихий дворик
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Room Amenities -->
+    <section class="py-20 bg-stone-100">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-stone-900 mb-4">В Номерах Предоставляется</h2>
+                <p class="text-stone-600 max-w-2xl mx-auto">Стандартные удобства во всех категориях номеров</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div class="flex items-center gap-4 p-4 bg-white rounded-xl">
+                    <div class="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <span class="text-stone-700 font-medium">Постельное бельё</span>
+                </div>
+                <div class="flex items-center gap-4 p-4 bg-white rounded-xl">
+                    <div class="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <span class="text-stone-700 font-medium">Полотенца</span>
+                </div>
+                <div class="flex items-center gap-4 p-4 bg-white rounded-xl">
+                    <div class="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <span class="text-stone-700 font-medium">ТВ</span>
+                </div>
+                <div class="flex items-center gap-4 p-4 bg-white rounded-xl">
+                    <div class="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <span class="text-stone-700 font-medium">Холодильник</span>
+                </div>
+                <div class="flex items-center gap-4 p-4 bg-white rounded-xl">
+                    <div class="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <span class="text-stone-700 font-medium">Чайник</span>
+                </div>
+                <div class="flex items-center gap-4 p-4 bg-white rounded-xl">
+                    <div class="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <span class="text-stone-700 font-medium">Фен</span>
+                </div>
+                <div class="flex items-center gap-4 p-4 bg-white rounded-xl">
+                    <div class="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <span class="text-stone-700 font-medium">Уборка</span>
+                </div>
+                <div class="flex items-center gap-4 p-4 bg-white rounded-xl">
+                    <div class="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <span class="text-stone-700 font-medium">Wi-Fi</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-teal-900 text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Готовы забронировать номер?</h2>
+            <p class="text-teal-100 max-w-2xl mx-auto mb-8">Свяжитесь с нами для подбора идеального номера для вашего отдыха</p>
+            <a href="contact.html" class="btn-primary inline-block text-lg">Забронировать сейчас</a>
+        </div>
+    </section>
+
+    <!-- Booking Modal -->
+    <div data-booking-modal class="fixed inset-0 z-[100] bg-black/70 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-8 relative scale-in">
+            <button data-booking-modal-close class="absolute top-4 right-4 text-stone-400 hover:text-stone-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <h3 class="text-2xl font-bold text-stone-900 mb-6">Бронирование номера</h3>
+            <form class="space-y-4" data-form>
+                <div>
+                    <label class="block text-sm font-medium text-stone-600 mb-1">Номер</label>
+                    <input type="text" name="room" class="w-full px-4 py-2 border border-stone-300 rounded-lg bg-stone-100" readonly>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-stone-600 mb-1">Ваше имя</label>
+                    <input type="text" class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none" placeholder="Иван Иванов" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-stone-600 mb-1">Телефон</label>
+                    <input type="tel" class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none" placeholder="+7 (___) ___-__-__" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-stone-600 mb-1">Дата заезда</label>
+                    <input type="date" class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-stone-600 mb-1">Дата выезда</label>
+                    <input type="date" class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none">
+                </div>
+                <button type="submit" class="w-full bg-teal-600 text-white font-bold py-3 rounded-lg hover:bg-teal-700 transition-colors">
+                    Отправить заявку
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-stone-900 text-stone-400 py-12 border-t border-stone-800">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                        <span class="text-white font-bold text-lg">Санаторий Щучинский</span>
+                    </div>
+                    <p class="text-sm text-stone-500 mb-4">Лечебно-оздоровительный комплекс в Щучинско-Боровской курортной зоне.</p>
+                    <p class="text-xs text-stone-600">БИН: 981240000041</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Навигация</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="about.html" class="hover:text-teal-500 transition-colors">О санатории</a></li>
+                        <li><a href="services.html" class="hover:text-teal-500 transition-colors">Услуги</a></li>
+                        <li><a href="rooms.html" class="hover:text-teal-500 transition-colors">Номера</a></li>
+                        <li><a href="programs.html" class="hover:text-teal-500 transition-colors">Программы</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Услуги</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="services.html" class="hover:text-teal-500 transition-colors">Медицинские процедуры</a></li>
+                        <li><a href="services.html" class="hover:text-teal-500 transition-colors">Бассейн и сауна</a></li>
+                        <li><a href="services.html" class="hover:text-teal-500 transition-colors">SPA-услуги</a></li>
+                        <li><a href="services.html" class="hover:text-teal-500 transition-colors">Питание Herbalife</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Контакты</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li>+7 (71636) 7-90-30</li>
+                        <li>+7 (747) 226-59-18 (WhatsApp)</li>
+                        <li>san-boro@mail.ru</li>
+                        <li>г. Щучинск, ул. Зеленая-24</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-stone-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-sm">&copy; 2025 АО «Санаторий Щучинский». Все права защищены.</div>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-white transition-colors">Instagram</a>
+                    <a href="#" class="hover:text-white transition-colors">WhatsApp</a>
+                    <a href="#" class="hover:text-white transition-colors">Telegram</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

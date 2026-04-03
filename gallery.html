@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Галерея санатория Щучинский — фотографии территории, номеров, озера Щучье и Бурабая.">
+    <title>Галерея | Санаторий Щучинский</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-stone-50 text-stone-800" x-data="{ mobileMenuOpen: false, activeFilter: 'all' }">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3 flex-shrink-0">
+                <img src="images/logo.png" alt="Щучинский" class="h-16 w-auto" style="background: transparent;">
+                <span class="text-2xl font-bold text-teal-700 tracking-tight hidden sm:block">Щучинский</span>
+            </a>
+
+            <div class="hidden md:flex space-x-6 lg:space-x-8 items-center">
+                <a href="index.html" class="nav-link text-stone-600 hover:text-teal-600 transition-colors text-sm lg:text-base">Главная</a>
+                <a href="about.html" class="nav-link text-stone-600 hover:text-teal-600 transition-colors text-sm lg:text-base">О санатории</a>
+                <a href="services.html" class="nav-link text-stone-600 hover:text-teal-600 transition-colors text-sm lg:text-base">Услуги</a>
+                <a href="rooms.html" class="nav-link text-stone-600 hover:text-teal-600 transition-colors text-sm lg:text-base">Номера</a>
+                <a href="programs.html" class="nav-link text-stone-600 hover:text-teal-600 transition-colors text-sm lg:text-base">Программы</a>
+                <a href="gallery.html" class="nav-link text-teal-600 font-semibold text-sm lg:text-base">Галерея</a>
+                <a href="contact.html" class="bg-teal-600 text-white px-6 py-3 rounded-full hover:bg-teal-700 transition-all transform hover:scale-105 shadow-md text-base whitespace-nowrap">Забронировать</a>
+            </div>
+
+            <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden text-stone-600 focus:outline-none flex-shrink-0" data-mobile-menu>
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <div x-show="mobileMenuOpen"
+             x-cloak
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 -translate-y-2"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 translate-y-0"
+             x-transition:leave-end="opacity-0 -translate-y-2"
+             @click.away="mobileMenuOpen = false"
+             class="md:hidden bg-white border-t border-stone-100 absolute w-full shadow-lg"
+             data-mobile-menu-panel>
+            <div class="flex flex-col px-6 py-4 space-y-4">
+                <a href="index.html" class="text-stone-600 hover:text-teal-600" data-mobile-menu-link>Главная</a>
+                <a href="about.html" class="text-stone-600 hover:text-teal-600" data-mobile-menu-link>О санатории</a>
+                <a href="services.html" class="text-stone-600 hover:text-teal-600" data-mobile-menu-link>Услуги</a>
+                <a href="rooms.html" class="text-stone-600 hover:text-teal-600" data-mobile-menu-link>Номера</a>
+                <a href="programs.html" class="text-stone-600 hover:text-teal-600" data-mobile-menu-link>Программы</a>
+                <a href="gallery.html" class="text-teal-600 font-semibold" data-mobile-menu-link>Галерея</a>
+                <a href="contact.html" class="text-teal-600 font-semibold" data-mobile-menu-link>Забронировать</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header-bg h-[30vh] min-h-[250px] flex items-center justify-center text-center px-4 relative">
+        <div class="max-w-4xl text-white fade-in">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">Галерея</h1>
+            <p class="text-lg md:text-xl text-stone-200 max-w-2xl mx-auto">Фотографии нашего санатория и живописных окрестностей Бурабая</p>
+        </div>
+    </header>
+
+    <!-- Filter Buttons -->
+    <section class="py-12 bg-white sticky top-[73px] z-40 border-b border-stone-200">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-wrap justify-center gap-3">
+                <button @click="activeFilter = 'all'" 
+                        :class="activeFilter === 'all' ? 'bg-teal-600 text-white' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'"
+                        class="px-6 py-3 rounded-full font-medium transition-all">
+                    Все фото
+                </button>
+                <button @click="activeFilter = 'exterior'" 
+                        :class="activeFilter === 'exterior' ? 'bg-teal-600 text-white' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'"
+                        class="px-6 py-3 rounded-full font-medium transition-all">
+                    Территория
+                </button>
+                <button @click="activeFilter = 'rooms'" 
+                        :class="activeFilter === 'rooms' ? 'bg-teal-600 text-white' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'"
+                        class="px-6 py-3 rounded-full font-medium transition-all">
+                    Номера
+                </button>
+                <button @click="activeFilter = 'lake'" 
+                        :class="activeFilter === 'lake' ? 'bg-teal-600 text-white' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'"
+                        class="px-6 py-3 rounded-full font-medium transition-all">
+                    Озеро Щучье
+                </button>
+                <button @click="activeFilter = 'nature'" 
+                        :class="activeFilter === 'nature' ? 'bg-teal-600 text-white' : 'bg-stone-100 text-stone-600 hover:bg-stone-200'"
+                        class="px-6 py-3 rounded-full font-medium transition-all">
+                    Природа Бурабая
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Grid -->
+    <section class="py-12 bg-stone-50">
+        <div class="container mx-auto px-6">
+            
+            <!-- Territory Photos -->
+            <div class="gallery-grid mb-12">
+                <h3 class="text-2xl font-bold text-stone-800 mb-6">Территория Санатория</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="col-span-2 row-span-2 overflow-hidden rounded-2xl cursor-pointer group" data-gallery-item data-category="exterior">
+                        <img src="https://image.qwenlm.ai/public_source/c7d9ebb0-6d3d-4867-8709-ac8342c48e9b/18e0be304-817a-45a1-a500-3e1771e38418.png" alt="Территория санатория" class="gallery-img w-full h-full object-cover rounded-2xl">
+                    </div>
+                    <div class="overflow-hidden rounded-2xl cursor-pointer group" data-gallery-item data-category="exterior">
+                        <img src="https://image.qwenlm.ai/public_source/c7d9ebb0-6d3d-4867-8709-ac8342c48e9b/15ac0cca4-c1a7-4883-925d-65f13495df46.png" alt="Вход в санаторий" class="gallery-img w-full h-full object-cover rounded-2xl">
+                    </div>
+                    <div class="overflow-hidden rounded-2xl cursor-pointer group" data-gallery-item data-category="exterior">
+                        <img src="https://image.qwenlm.ai/public_source/c7d9ebb0-6d3d-4867-8709-ac8342c48e9b/198db000b-4719-44e7-9a92-1e97b9579f05.png" alt="Сосновый бор" class="gallery-img w-full h-full object-cover rounded-2xl">
+                    </div>
+                    <div class="overflow-hidden rounded-2xl cursor-pointer group" data-gallery-item data-category="exterior">
+                        <img src="https://image.qwenlm.ai/public_source/c7d9ebb0-6d3d-4867-8709-ac8342c48e9b/15930bae3-832a-48a7-b490-dd578142df13.png" alt="Аллея" class="gallery-img w-full h-full object-cover rounded-2xl">
+                    </div>
+                    <div class="overflow-hidden rounded-2xl cursor-pointer group" data-gallery-item data-category="exterior">
+                        <img src="https://image.qwenlm.ai/public_source/c7d9ebb0-6d3d-4867-8709-ac8342c48e9b/189a55cf6-3b1f-4db5-a826-045c13727768.png" alt="Вечерний санаторий" class="gallery-img w-full h-full object-cover rounded-2xl">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rooms Photos -->
+            <div class="gallery-grid mb-12">
+                <h3 class="text-2xl font-bold text-stone-800 mb-6">Номера и Интерьеры</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="col-span-2 row-span-2 overflow-hidden rounded-2xl cursor-pointer group" data-gallery-item data-category="rooms">
+                        <img src="https://image.qwenlm.ai/public_source/c7d9ebb0-6d3d-4867-8709-ac8342c48e9b/189a55cf6-3b1f-4db5-a826-045c13727768.png" alt="Номер люкс" class="gallery-img w-full h-full object-cover rounded-2xl">
+                    </div>
+                    <div class="overflow-hidden rounded-2xl cursor-pointer group" data-gallery-item data-category="rooms">
+                        <img src="https://image.qwenlm.ai/public_source/c7d9ebb0-6d3d-4867-8709-ac8342c48e9b/15ac0cca4-c1a7-4883-925d-65f13495df46.png" alt="Стандарт номер" class="gallery-img w-full h-full object-cover rounded-2xl">
+                    </div>
+                    <div class="overflow-hidden rounded-2xl cursor-pointer group" data-gallery-item data-category="rooms">
+                        <img src="https://image.qwenlm.ai/public_source/c7d9ebb0-6d3d-4867-8709-ac8342c48e9b/198db000b-4719-44e7-9a92-1e97b9579f05.png" alt="Ванная комната" class="gallery-img w-full h-full object-cover rounded-2xl">
+                    </div>
+                    <div class="overflow-hidden rounded-2xl cursor-pointer group" data-gallery-item data-category="rooms">
+                        <img src="https://image.qwenlm.ai/public_source/c7d9ebb0-6d3d-4867-8709-ac8342c48e9b/15930bae3-832a-48a7-b490-dd578142df13.png" alt="Детали интерьера" class="gallery-img w-full h-full object-cover rounded-2xl">
+                    </div>
+                    <div class="overflow-hidden rounded-2xl cursor-pointer group" data-gallery-item data-category="rooms">
+                        <img src="https://image.qwenlm.ai/public_source/c7d9ebb0-6d3d-4867-8709-ac8342c48e9b/18e0be304-817a-45a1-a500-3e1771e38418.png" alt="Балкон с видом" class="gallery-img w-full h-full object-cover rounded-2xl">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lake Shchuchye Photos -->
+            <div class="gallery-grid mb-12">
+                <h3 class="text-2xl font-bold text-stone-800 mb-6">Озеро Щучье</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="col-span-2 row-span-2 overflow-hidden rounded-2xl cursor-pointer group" data-gallery-item data-category="lake">
+                        <img src="https://image.qwenlm.ai/public_source/c7d9ebb0-6d3d-4867-8709-ac8342c48e9b/18e0be304-817a-45a1-a500-3e1771e38418.png" alt="Озеро Щучье" class="gallery-img w-full h-full object-cover rounded-2xl">
+                    </div>
+                    <div class="overflow-hidden rounded-2xl cursor-pointer group" data-gallery-item data-category="lake">
+                        <img src="https://image.qwenlm.ai/public_source/c7d9ebb0-6d3d-4867-8709-ac8342c48e9b/15ac0cca4-c1a7-4883-925d-65f13495df46.png" alt="Берег озера" class="gallery-img w-full h-full object-cover rounded-2xl">
+                    </div>
+                    <div class="overflow-hidden rounded-2xl cursor-pointer group" data-gallery-item data-category="lake">
+                        <img src="https://image.qwenlm.ai/public_source/c7d9ebb0-6d3d-4867-8709-ac8342c48e9b/198db000b-4719-44e7-9a92-1e97b9579f05.png" alt="Закат на озере" class="gallery-img w-full h-full object-cover rounded-2xl">
+                    </div>
+                    <div class="overflow-hidden rounded-2xl cursor-pointer group" data-gallery-item data-category="lake">
+                        <img src="https://image.qwenlm.ai/public_source/c7d9ebb0-6d3d-4867-8709-ac8342c48e9b/15930bae3-832a-48a7-b490-dd578142df13.png" alt="Пляж" class="gallery-img w-full h-full object-cover rounded-2xl">
+                    </div>
+                    <div class="overflow-hidden rounded-2xl cursor-pointer group" data-gallery-item data-category="lake">
+                        <img src="https://image.qwenlm.ai/public_source/c7d9ebb0-6d3d-4867-8709-ac8342c48e9b/189a55cf6-3b1f-4db5-a826-045c13727768.png" alt="Утреннее озеро" class="gallery-img w-full h-full object-cover rounded-2xl">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nature Photos -->
+            <div class="gallery-grid mb-12">
+                <h3 class="text-2xl font-bold text-stone-800 mb-6">Природа Бурабая</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="col-span-2 row-span-2 overflow-hidden rounded-2xl cursor-pointer group" data-gallery-item data-category="nature">
+                        <img src="https://image.qwenlm.ai/public_source/c7d9ebb0-6d3d-4867-8709-ac8342c48e9b/18e0be304-817a-45a1-a500-3e1771e38418.png" alt="Горы Бурабая" class="gallery-img w-full h-full object-cover rounded-2xl">
+                    </div>
+                    <div class="overflow-hidden rounded-2xl cursor-pointer group" data-gallery-item data-category="nature">
+                        <img src="https://image.qwenlm.ai/public_source/c7d9ebb0-6d3d-4867-8709-ac8342c48e9b/15ac0cca4-c1a7-4883-925d-65f13495df46.png" alt="Сосновый лес" class="gallery-img w-full h-full object-cover rounded-2xl">
+                    </div>
+                    <div class="overflow-hidden rounded-2xl cursor-pointer group" data-gallery-item data-category="nature">
+                        <img src="https://image.qwenlm.ai/public_source/c7d9ebb0-6d3d-4867-8709-ac8342c48e9b/198db000b-4719-44e7-9a92-1e97b9579f05.png" alt="Горная тропа" class="gallery-img w-full h-full object-cover rounded-2xl">
+                    </div>
+                    <div class="overflow-hidden rounded-2xl cursor-pointer group" data-gallery-item data-category="nature">
+                        <img src="https://image.qwenlm.ai/public_source/c7d9ebb0-6d3d-4867-8709-ac8342c48e9b/15930bae3-832a-48a7-b490-dd578142df13.png" alt="Цветы" class="gallery-img w-full h-full object-cover rounded-2xl">
+                    </div>
+                    <div class="overflow-hidden rounded-2xl cursor-pointer group" data-gallery-item data-category="nature">
+                        <img src="https://image.qwenlm.ai/public_source/c7d9ebb0-6d3d-4867-8709-ac8342c48e9b/189a55cf6-3b1f-4db5-a826-045c13727768.png" alt="Поляна" class="gallery-img w-full h-full object-cover rounded-2xl">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-stone-900 mb-4">Виртуальный Тур</h2>
+                <p class="text-stone-600 max-w-2xl mx-auto">Посмотрите видео о санатории и его окрестностях</p>
+            </div>
+            <div class="max-w-4xl mx-auto">
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                    <div class="aspect-video bg-stone-900 flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-4 cursor-pointer hover:bg-white/30 transition-all">
+                                <svg class="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"></path>
+                                </svg>
+                            </div>
+                            <p class="text-white/80">Нажмите для просмотра видео</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Info -->
+    <section class="py-20 bg-stone-100">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-stone-900 mb-4">Щучинско-Боровская Курортная Зона</h2>
+                <p class="text-stone-600 max-w-3xl mx-auto">
+                    Санаторий «Щучинский» расположен в уникальном месте Казахстана — среди вековых сосновых боров на берегу кристально чистого озера Щучье. 
+                    Горный воздух, насыщенный фитонцидами, и живописные пейзажи создают идеальные условия для восстановления здоровья.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+                    <div class="text-4xl font-bold text-teal-600 mb-2">120+ км²</div>
+                    <p class="text-stone-600">Площадь курортной зоны</p>
+                </div>
+                <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+                    <div class="text-4xl font-bold text-teal-600 mb-2">14</div>
+                    <p class="text-stone-600">Озёр в районе</p>
+                </div>
+                <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+                    <div class="text-4xl font-bold text-teal-600 mb-2">800+</div>
+                    <p class="text-stone-600">Видов растений</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div data-lightbox class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm hidden items-center justify-center p-4">
+        <button data-lightbox-close class="absolute top-4 right-4 text-white/70 hover:text-white z-10">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+        <button class="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white z-10">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+        </button>
+        <button class="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white z-10">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+        </button>
+        <img data-lightbox-img src="" alt="Full size" class="max-w-full max-h-[90vh] object-contain rounded-lg">
+    </div>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-teal-900 text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Хотите увидеть всё своими глазами?</h2>
+            <p class="text-teal-100 max-w-2xl mx-auto mb-8">Забронируйте отдых в санатории «Щучинский» и убедитесь, что в реальности ещё красивее</p>
+            <a href="contact.html" class="btn-primary inline-block text-lg">Забронировать сейчас</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-stone-900 text-stone-400 py-12 border-t border-stone-800">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                        <span class="text-white font-bold text-lg">Санаторий Щучинский</span>
+                    </div>
+                    <p class="text-sm text-stone-500 mb-4">Лечебно-оздоровительный комплекс в Щучинско-Боровской курортной зоне.</p>
+                    <p class="text-xs text-stone-600">БИН: 981240000041</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Навигация</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="about.html" class="hover:text-teal-500 transition-colors">О санатории</a></li>
+                        <li><a href="services.html" class="hover:text-teal-500 transition-colors">Услуги</a></li>
+                        <li><a href="rooms.html" class="hover:text-teal-500 transition-colors">Номера</a></li>
+                        <li><a href="programs.html" class="hover:text-teal-500 transition-colors">Программы</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Услуги</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="services.html" class="hover:text-teal-500 transition-colors">Медицинские процедуры</a></li>
+                        <li><a href="services.html" class="hover:text-teal-500 transition-colors">Бассейн и сауна</a></li>
+                        <li><a href="services.html" class="hover:text-teal-500 transition-colors">SPA-услуги</a></li>
+                        <li><a href="services.html" class="hover:text-teal-500 transition-colors">Питание Herbalife</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Контакты</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li>+7 (71636) 7-90-30</li>
+                        <li>+7 (747) 226-59-18 (WhatsApp)</li>
+                        <li>san-boro@mail.ru</li>
+                        <li>г. Щучинск, ул. Зеленая-24</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-stone-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-sm">&copy; 2025 АО «Санаторий Щучинский». Все права защищены.</div>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-white transition-colors">Instagram</a>
+                    <a href="#" class="hover:text-white transition-colors">WhatsApp</a>
+                    <a href="#" class="hover:text-white transition-colors">Telegram</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Gallery filter functionality
+        document.querySelectorAll('[data-gallery-item]').forEach(item => {
+            const category = item.getAttribute('data-category');
+            item.addEventListener('click', function() {
+                const lightbox = document.querySelector('[data-lightbox]');
+                const lightboxImg = document.querySelector('[data-lightbox-img]');
+                const img = this.querySelector('img');
+                if (lightbox && lightboxImg && img) {
+                    lightboxImg.src = img.src;
+                    lightbox.classList.remove('hidden');
+                    lightbox.classList.add('flex');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+
+        // Close lightbox
+        const lightboxClose = document.querySelector('[data-lightbox-close]');
+        const lightbox = document.querySelector('[data-lightbox]');
+        if (lightboxClose && lightbox) {
+            lightboxClose.addEventListener('click', function() {
+                lightbox.classList.add('hidden');
+                lightbox.classList.remove('flex');
+                document.body.style.overflow = '';
+            });
+        }
+    </script>
+</body>
+</html>
